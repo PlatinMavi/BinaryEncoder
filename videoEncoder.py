@@ -7,8 +7,8 @@ import cv2
 
 class VideoGenerator():
     def __init__(self) -> None:
-        self.imagesize = 256
-        self.fps = 24
+        self.imagesize = 20736
+        self.fps = 8
 
     def BreakChunks(self):
         encoded_string, out = FileEncoder.FileEncoder().EncodeFile()
@@ -46,7 +46,7 @@ class VideoGenerator():
         for x in chunks:
             n = 1
             chunk = [x[i * n:(i + 1) * n] for i in range((len(x) + n - 1) // n )]
-            image = Image.new("RGB", (16, 16), color="white")
+            image = Image.new("RGB", (144, 144), color="white")
             width, height = image.size
 
             mistakecount = 0
@@ -65,10 +65,29 @@ class VideoGenerator():
             image.save("C:/Users/PC/Desktop/BinaryEncoder/TempImages/"+str(i)+".png")
             i=i+1
 
+    def GenerateImage(self):
+        encoded_string, out = FileEncoder.FileEncoder().EncodeFile()
+        encoded_string = encoded_string.split(".")
+        encoded_str = encoded_string[0]
+        extension = encoded_string[-1]
+        n = 1
+        encoded_list = [encoded_str[i * n:(i + 1) * n] for i in range((len(encoded_str) + n - 1) // n )]
+
+        image = Image.new("RGB", (8, len(encoded_list)//8), color="white")
+        width, height = image.size
+        chunkindex = 0
+
+        for x in range(width):
+            for y in range(height):
+                image.putpixel((x, y), pixelColor.GetRGB(encoded_list[chunkindex]))
+                chunkindex = chunkindex+1
+        image.save("C:/Users/PC/Desktop/BinaryEncoder/TempImages/"+extension+".png")
+
     def natural_sort_key(self,s):
         return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', s)]
 
     def TurnIntoVideo(self):
+        self.GenerateImages()
         images_directory = "C:/Users/PC/Desktop/BinaryEncoder/TempImages"
         output_video_path = "C:/Users/PC/Desktop/BinaryEncoder/output/output.mp4"
         image_files = os.listdir(images_directory)
@@ -95,4 +114,4 @@ class VideoGenerator():
 
     
 vg = VideoGenerator()
-print(vg.TurnIntoVideo())
+print(vg.GenerateImage())

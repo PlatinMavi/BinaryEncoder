@@ -25,3 +25,10 @@ def GetRGB(key):
         if key == k:
             return rgb_value
     return None
+
+def GetKey(rgb_value):
+    mapping = generateMapping()
+    for key, value in mapping:
+        if rgb_value == value:
+            return key
+    return None
