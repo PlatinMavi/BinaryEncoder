@@ -1,6 +1,8 @@
 import FileDecoder
 import FileEncoder
 
+__name__ == "__main__"
+
 option = input("1: Encode\n2:Decode\nPlease select the option to procces for input: ")
 
 if option == "1":
