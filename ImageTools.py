@@ -28,7 +28,8 @@ class ImageTools():
 
 
     def GenerateImage(self):
-        encoded_string = FileEncoder.FileEncoder().EncodeFile(FileEncoder.FileEncoder().GetFile())
+        c,v = FileEncoder.FileEncoder().GetFile()
+        encoded_string = FileEncoder.FileEncoder().EncodeFile(c)
         encoded_string = encoded_string.split(".")
         encoded_str = encoded_string[0]
         extension = encoded_string[-1]
@@ -43,14 +44,14 @@ class ImageTools():
             for y in range(height):
                 image.putpixel((x, y), pixelColor.GetRGB(encoded_list[chunkindex]))
                 chunkindex = chunkindex+1
-        image.save("./output/"+extension+".png")
+        image.save("./output/"+v+"."+extension+".png")
 
 
     def DecodeImage(self):
         file = FileEncoder.FileEncoder().GetFile()
         image = cv2.imread(file)
         height, width, _ = image.shape
-        extension = file.split("/")[-1].split(".")[0]
+        extension = file.split("/")[-1].split(".")[-2]
 
         full = ""
 

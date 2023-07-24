@@ -7,7 +7,7 @@ class FileEncoder():
         path = "./input/"
         file = os.listdir(path)[0]
         newpath = os.path.join(path, file)
-        return newpath
+        return newpath, file.split(".")[0]
     
     def EncodeFile(self,filepath):
         
