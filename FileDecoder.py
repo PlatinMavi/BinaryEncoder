@@ -24,7 +24,7 @@ class FileDecoder():
 
         return binary_str, outfilepath+extension
     
-    def DecodeFile(self,file, outfilepath):
+    def DecodeFile(self,file):
         binary_str = ""
         encoded_string = file.split(".")
         extension = encoded_string[-1]
@@ -36,10 +36,10 @@ class FileDecoder():
                 binary_str = binary_str+EncoderDecoder.GetBinary(x)
             except:
                 pass
-        return binary_str, outfilepath
+        return binary_str
     
-    def SaveFile(self,file, outfilepath):
-        binary_string, filepath = self.DecodeFile(file, outfilepath)
+    def SaveFile(self,file, filepath):
+        binary_string = self.DecodeFile(file)
 
         bytes_list = [binary_string[i:i+8] for i in range(0, len(binary_string), 8)]
         int_list = [int(byte, 2) for byte in bytes_list]

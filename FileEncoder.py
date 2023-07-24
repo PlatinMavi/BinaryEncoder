@@ -7,10 +7,9 @@ class FileEncoder():
         path = "C:/Users/PC/Desktop/BinaryEncoder/input/"
         file = os.listdir(path)[0]
         newpath = os.path.join(path, file)
-        output = "C:/Users/PC/Desktop/BinaryEncoder/output/output.txt"
-        return newpath, output
+        return newpath
     
-    def EncodeFile(self,filepath, output):
+    def EncodeFile(self,filepath):
         
         extension = "."+filepath.split(".")[-1]
         
@@ -25,10 +24,10 @@ class FileEncoder():
                 key = EncoderDecoder.GetKey(x)
                 key_str = key_str+key
                 
-        return key_str+extension, output
+        return key_str+extension
     
-    def SaveEncode(self,filepath, outputt):
-        encodedData, output = self.EncodeFile(filepath, outputt)
+    def SaveEncode(self,filepath, output="C:/Users/PC/Desktop/BinaryEncoder/output/output.txt"):
+        encodedData = self.EncodeFile(filepath)
 
         with open(output,"wt") as file:
             file.write(encodedData)

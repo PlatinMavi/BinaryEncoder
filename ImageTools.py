@@ -8,14 +8,14 @@ import cv2
 class ImageTools():
 
     def GenerateImage(self):
-        encoded_string, out = FileEncoder.FileEncoder().EncodeFile()
+        encoded_string = FileEncoder.FileEncoder().EncodeFile(FileEncoder.FileEncoder().GetFile())
         encoded_string = encoded_string.split(".")
         encoded_str = encoded_string[0]
         extension = encoded_string[-1]
         n = 1
         encoded_list = [encoded_str[i * n:(i + 1) * n] for i in range((len(encoded_str) + n - 1) // n )]
 
-        image = Image.new("RGB", (8, len(encoded_list)//8), color="white")
+        image = Image.new("RGB", (4, len(encoded_list)//4), color="white")
         width, height = image.size
         chunkindex = 0
 
@@ -23,19 +23,13 @@ class ImageTools():
             for y in range(height):
                 image.putpixel((x, y), pixelColor.GetRGB(encoded_list[chunkindex]))
                 chunkindex = chunkindex+1
-        image.save("C:/Users/PC/Desktop/BinaryEncoder/outputpng/"+extension+".png")
+        image.save("C:/Users/PC/Desktop/BinaryEncoder/output/"+extension+".png")
 
-    def GetFile(self):
-        path = "C:/Users/PC/Desktop/BinaryEncoder/input/"
-        file = os.listdir(path)[0]
-        newpath = os.path.join(path, file)
-        output = file.split(".")[0]
-        return newpath, output
 
-    def DecodeImage(self):
-        file, out = self.GetFile()
+    def DecodeImage(self, file):
         image = cv2.imread(file)
         height, width, _ = image.shape
+        extension = file.split("/")[-1].split(".")[0]
 
         full = ""
 
@@ -47,7 +41,8 @@ class ImageTools():
 
                 full = full + encoded
 
-        FileDecoder.FileDecoder().SaveFile(full, "C:/Users/PC/Desktop/BinaryEncoder/output/output."+out)
+        FileDecoder.FileDecoder().SaveFile(full+"."+extension, "C:/Users/PC/Desktop/BinaryEncoder/output/output."+extension)
 
 vg = ImageTools()
-vg.DecodeImage()
+vg.GenerateImage()
+# vg.DecodeImage("C:/Users/PC/Desktop/BinaryEncoder/input/png.png")
