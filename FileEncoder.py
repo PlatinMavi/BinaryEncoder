@@ -25,9 +25,3 @@ class FileEncoder():
                 key_str = key_str+key
                 
         return key_str+extension
-    
-    def SaveEncode(self,filepath, output="C:/Users/PC/Desktop/BinaryEncoder/output/output.txt"):
-        encodedData = self.EncodeFile(filepath)
-
-        with open(output,"wt") as file:
-            file.write(encodedData)

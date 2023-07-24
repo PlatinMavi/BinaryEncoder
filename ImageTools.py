@@ -26,7 +26,8 @@ class ImageTools():
         image.save("C:/Users/PC/Desktop/BinaryEncoder/output/"+extension+".png")
 
 
-    def DecodeImage(self, file):
+    def DecodeImage(self):
+        file = FileEncoder.FileEncoder().GetFile()
         image = cv2.imread(file)
         height, width, _ = image.shape
         extension = file.split("/")[-1].split(".")[0]
@@ -42,7 +43,3 @@ class ImageTools():
                 full = full + encoded
 
         FileDecoder.FileDecoder().SaveFile(full+"."+extension, "C:/Users/PC/Desktop/BinaryEncoder/output/output."+extension)
-
-vg = ImageTools()
-vg.GenerateImage()
-# vg.DecodeImage("C:/Users/PC/Desktop/BinaryEncoder/input/png.png")
