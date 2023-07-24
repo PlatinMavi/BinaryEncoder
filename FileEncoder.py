@@ -4,7 +4,7 @@ import EncoderDecoder
 class FileEncoder():
     
     def GetFile(self):
-        path = "C:/Users/PC/Desktop/BinaryEncoder/input/"
+        path = "./input/"
         file = os.listdir(path)[0]
         newpath = os.path.join(path, file)
         return newpath

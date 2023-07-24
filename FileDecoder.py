@@ -4,10 +4,10 @@ import EncoderDecoder
 class FileDecoder():
 
     def GetFile(self):
-        path = "C:/Users/PC/Desktop/BinaryEncoder/input/"
+        path = "./input"
         file = os.listdir(path)[0]
         newpath = os.path.join(path, file)
-        output = "C:/Users/PC/Desktop/BinaryEncoder/output/output."
+        output = "./output/output."
         return newpath, output
     
     def DecodeFile(self,file):

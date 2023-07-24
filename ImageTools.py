@@ -43,7 +43,7 @@ class ImageTools():
             for y in range(height):
                 image.putpixel((x, y), pixelColor.GetRGB(encoded_list[chunkindex]))
                 chunkindex = chunkindex+1
-        image.save("C:/Users/PC/Desktop/BinaryEncoder/output/"+extension+".png")
+        image.save("./output/"+extension+".png")
 
 
     def DecodeImage(self):
@@ -62,5 +62,5 @@ class ImageTools():
 
                 full = full + encoded
 
-        FileDecoder.FileDecoder().SaveFile(full+"."+extension, "C:/Users/PC/Desktop/BinaryEncoder/output/output."+extension)
+        FileDecoder.FileDecoder().SaveFile(full+"."+extension, "./output/output."+extension)
 
